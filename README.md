@@ -28,11 +28,8 @@ In this example I have 4 keys. Wallet1, wallet2, wallet3 and relayer.
 I changed Owner state variable from private to public so that inheriting ERC20 contract can access the owner. The intention was to make sure whenever the mint button is pressed, owner of the ERC20
 contract receives the newly minted token. IT IS A TERRIBLE PRACTICE since the Ownable contract's owner variable can 'potentially' change the state variable upstream.
 
-5) Please install dependencies
-please open your terminal to execute
-
-npm install
-
+5) Node module is up in the github
+so npm install would be not neccessary.
 and to run the code, please execute
 
 npx hardhat run scripts/magic.js --network ganache
