@@ -61,7 +61,7 @@ then the server will keep generating metatransactions in random intervals.
 
 Metatransactions will keep piling up.
 
-Once the number of Metatransactions reaches 21, the metatransactions will be sent to blockchain.
+Once the number of Metatransactions reaches 63, the metatransactions will be sent to blockchain.
 
 Once the timer (which I set to 2 * 15 * 1000) clicks, the metatransactions will be sent to blockchain.
 
@@ -98,7 +98,7 @@ I made this tokens to be extremely easy to mint since the whole focus of this pr
 ####Regarding relayerv4.js####
 
 My server will send Metatransactions to blockchain under two conditions
-First, when there are 21 metatransactions piled up.
+First, when there are 63 metatransactions piled up.
 Second, when one fourth of two minutes (2 * 15 * 1000) passes.
 
 I wanted to make sure that the relayer works in gas efficiently but ganache cannot really
