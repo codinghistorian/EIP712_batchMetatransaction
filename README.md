@@ -51,7 +51,7 @@ Please first run ganach and execute
 
 and then run
 
-    node relayerv4
+    node relayerV4.js
 
 and then go to your browser and request with url below
 
