@@ -157,7 +157,6 @@ amounts.push(amount3);
 //So the receiver below is the contract that is called by the 'supposed to be' a node.js relayer.
 let Receiver = new ethers.Contract(ReceiverAdd,abiReceiver,relayer);
 
-
 // init when assigning signer address to a mapping of nonce
 // Also something my server was supposed to take care of.
 

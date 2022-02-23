@@ -1,11 +1,13 @@
-Abstract
+####Abstract####
 
 1)This hardhat project deploys 3 ERC20 tokens and a proxy smart contract to ganache
 2)The proxy smart contract parses, verify and execute batched meta-transactions requested by a relayer.
 3)Relayer sends meta-transactions to the proxy. so that the proxy can mint tokens on behalf of the EIP712 signature signers.
 
 
-Setting
+
+
+####Environment####
 
 0)Node.js, NPM version
 Node : v14.17.3
@@ -30,13 +32,53 @@ contract receives the newly minted token. IT IS A TERRIBLE PRACTICE since the Ow
 
 5) Node module is up in the github
 so npm install would be not neccessary.
-and to run the code, please execute
-
-npx hardhat run scripts/magic.js --network ganache
 
 
 
-About the Smart contracts
+
+####To see the simple version of the relayer####
+
+Please first run ganache and execute
+
+    npx hardhat run scripts/magic.js --network ganache
+
+####To run the relayer server####
+
+Please first run ganach and execute
+
+    npx hardhat run scripts/deploy.js --network ganache
+
+and then run
+
+    node relayerv4
+
+and then go to your browser and request with url below
+
+    http://localhost:5000/sign0
+
+then the server will keep generating metatransactions in random intervals.
+
+Metatransactions will keep piling up.
+
+Once the number of Metatransactions reaches 21, the metatransactions will be sent to blockchain.
+
+Once the timer (which I set to 2 * 15 * 1000) clicks, the metatransactions will be sent to blockchain.
+
+Two conditions above work without collision.
+
+To see if metatransactions were indeed executeted.
+
+please run
+
+    npx hardhat run scripts/talktoToken.js --network ganache
+
+It will show that first, second tokens were minted but the third one is not
+(because I set the nonce wrong intentionally)
+
+
+
+
+####About the Smart contracts####
 
 #ReceiverV8#
 This is the proxy contract which parses, verifies and execute batched meta-transactions.
@@ -44,12 +86,35 @@ In order to receive meta-transactions from a certain wallet address, the wallet 
 BatchMetatransactions come in as arrays. And they are executed in interation in the function
 batchExecute();
 
+
+
 #ERC20#
 I made this tokens to be extremely easy to mint since the whole focus of this project is the execute metatransaction in batch.
 
 
 
-About the scripts magic.js
+
+####Regarding relayerv4.js####
+
+My server will send Metatransactions to blockchain under two conditions
+First, when there are 21 metatransactions piled up.
+Second, when one fourth of two minutes (2 * 15 * 1000) passes.
+
+I wanted to make sure that the relayer works in gas efficiently but ganache cannot really
+handle 84 metatransactions at a time.(It will just die)
+
+So, the optimal condition to show that my relayer works either with time or the number of metatransactions piled up was as mentioned above.
+
+Regarding the max number of metatransactions,
+the block gas limit in ganache is 6721975
+when I shoved in 3 metatransactions to mint tokens, it costed 79128.
+by this figure, it is possible to shove in 84.95 metatransactions.
+I could have saved upto 84 metatransactions in the server and then send them to the blockchain
+(if ganache could handle)
+
+
+
+####About scripts/magic.js#### 
 
 1)The scripts deploys 3 erc20 tokens and a proxy smart contract.
 2)It generates EIP712 signatures signed by each wallets.
@@ -58,18 +123,22 @@ About the scripts magic.js
 5)The scripts mints MyToken1 by 11111111111, MyToken2 by 22222222222 and MyToken3 by 0.
 More detail can be found in the comments of magic.js file.
 
-What I should have done but could not.
+This is a simplified version of how relayer and the smart contracts should work.
 
-1)Setting up a server.
-I could not do it. I got sick with COVID through the week.
-But at least wanted to share what I have done so far.
 
-Regarding the max number of metatransactions,
-the block gas limit in ganache is 6721975
-when I shoved in 3 metatransactions to mint tokens, it costed 79128.
-by this figure, it is possible to shove in 84.95 metatransactions.
-I could have saved upto 84 metatransactions in the server and then send them to the blockchain.
 
-2)Development in Typescript.
+###regarding addresses.json###
 
-Honestly, I am a lot more familiar with Javascript. So I thought I will just make everything in Javascript and then change them into Typescript. Yet again, I got sick and had no time to do it.
+Everytime you deploy smart contracts to ganache, the addresses will be recorded in
+
+addresses.json
+
+file.
+
+
+
+
+###Archive###
+
+Archive contains relayerV1 ~ relayerV3
+It simply keeps track of how I was gradually solving problems one by one.

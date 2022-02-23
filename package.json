@@ -1,5 +1,9 @@
 {
   "name": "hardhat-project",
+  "scripts": {
+    "start": "node relayer",
+    "dev": "nodemon relayer"
+  },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.3",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
@@ -11,6 +15,7 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.4.2",
-    "@uniswap/sdk": "^3.0.3"
+    "@uniswap/sdk": "^3.0.3",
+    "nodemon": "^2.0.15"
   }
 }
