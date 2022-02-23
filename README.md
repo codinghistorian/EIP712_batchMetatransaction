@@ -32,6 +32,7 @@ contract receives the newly minted token. IT IS A TERRIBLE PRACTICE since the Ow
 
 5) Node module is up in the github
 so npm install would be not neccessary.
+I know this is not the best practice but I messed with the files inside the node.modules, so.
 
 
 
@@ -108,8 +109,8 @@ So, the optimal condition to show that my relayer works either with time or the 
 Regarding the max number of metatransactions,
 the block gas limit in ganache is 6721975
 when I shoved in 3 metatransactions to mint tokens, it costed 79128.
-by this figure, it is possible to shove in 84.95 metatransactions.
-I could have saved upto 84 metatransactions in the server and then send them to the blockchain
+by this figure, it is possible to shove in about 255 metatransactions.
+I could have saved upto about 255 metatransactions in the server and then send them to the blockchain
 (if ganache could handle)
 
 

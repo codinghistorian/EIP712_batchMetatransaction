@@ -46,7 +46,7 @@ var nonceW1 = counter;
 var nonceW2 = counter;
 var nonceW3 = counter;
 
-const ReceiverV8Artifact = require('./artifacts/contracts/4_ReceiverV8.sol/ReceiverV8.json');
+const ReceiverV8Artifact = require('../artifacts/contracts/4_ReceiverV8.sol/ReceiverV8.json');
 
 const abiReceiver = ReceiverV8Artifact.abi;
 

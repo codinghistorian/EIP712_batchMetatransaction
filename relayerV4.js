@@ -149,10 +149,10 @@ const server = http.createServer(async (req, res)=> {
         if(targets.length === 
           63
 
-          //The most gas-efficient number of meta-transactions would be 84
-          //but ganache kind of goes crazy with that, so I just keep it down as much as 63
-          // 126
-          // 252
+          //The most gas-efficient number of piling up and sending
+          // meta-transactions would be 255
+          //but ganache kind of goes crazy with that, so I just keep it down as 63
+
           ) {
           batchExecute();
           refreshTimer();
@@ -175,7 +175,7 @@ const server = http.createServer(async (req, res)=> {
           
         }
         
-        console.log(targets.length);
+        console.log(targets.length + ' Metransactions piled up');
         // console.log(signers.length);
         // console.log(amounts.length);
         const valueW1 = {amount:amount1, target: mytoken1.address, nonce: nonceW1};
@@ -195,14 +195,14 @@ const server = http.createServer(async (req, res)=> {
         // console.log("wallet3's signature is " + signatureW3);
 
         // A very simple but effective way to check the validity of the signature
-        // let recoveredW1 = hre.ethers.utils.verifyTypedData(domain, types, valueW1, signatureW1);
-        // console.log(wallet1.address == recoveredW1);
+        let recoveredW1 = hre.ethers.utils.verifyTypedData(domain, types, valueW1, signatureW1);
+        console.log('Is W1 signature valid? ' + (wallet1.address == recoveredW1));
 
-        // let recoveredW2 = hre.ethers.utils.verifyTypedData(domain, types, valueW2, signatureW2);
-        // console.log(wallet2.address == recoveredW2);
+        let recoveredW2 = hre.ethers.utils.verifyTypedData(domain, types, valueW2, signatureW2);
+        console.log('Is W1 signature valid? ' + (wallet2.address == recoveredW2));
 
-        // let recoveredW3 = hre.ethers.utils.verifyTypedData(domain, types, valueW3, signatureW3);
-        // console.log(wallet3.address == recoveredW3);
+        let recoveredW3 = hre.ethers.utils.verifyTypedData(domain, types, valueW3, signatureW3);
+        console.log('Is W1 signature valid? ' + (wallet3.address == recoveredW3));
 
         signedSignatures.push(signatureW1);
         signedSignatures.push(signatureW2);
@@ -241,8 +241,7 @@ const server = http.createServer(async (req, res)=> {
                     await operate(rand);
                     loop();  
             }, rand);
-            var timeCount = 1 + rand;
-            console.log(timeCount);
+            console.log("interval is " + rand);
         }());
 
 // A very simple but effective way to check the validity of the signature
