@@ -18,6 +18,7 @@ NPM : 6.14.13
 
 2)Ganache GUI version
 2.5.4
+port number: 9545
 
 3) .env file
 .env file needs to have ganache accounts private keys for reproduction.
