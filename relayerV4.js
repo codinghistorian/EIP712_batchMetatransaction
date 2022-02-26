@@ -199,10 +199,10 @@ const server = http.createServer(async (req, res)=> {
         console.log('Is W1 signature valid? ' + (wallet1.address == recoveredW1));
 
         let recoveredW2 = hre.ethers.utils.verifyTypedData(domain, types, valueW2, signatureW2);
-        console.log('Is W1 signature valid? ' + (wallet2.address == recoveredW2));
+        console.log('Is W2 signature valid? ' + (wallet2.address == recoveredW2));
 
         let recoveredW3 = hre.ethers.utils.verifyTypedData(domain, types, valueW3, signatureW3);
-        console.log('Is W1 signature valid? ' + (wallet3.address == recoveredW3));
+        console.log('Is W3 signature valid? ' + (wallet3.address == recoveredW3));
 
         signedSignatures.push(signatureW1);
         signedSignatures.push(signatureW2);
