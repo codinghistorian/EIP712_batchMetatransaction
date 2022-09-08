@@ -28,8 +28,8 @@ In this example I have 4 keys. Wallet1, wallet2, wallet3 and relayer.
 
 4)Ownable.sol -> Ownable2.sol in Openzeppelin
 
-I changed Owner state variable from private to public so that inheriting ERC20 contract can access the owner. The intention was to make sure whenever the mint button is pressed, owner of the ERC20
-contract receives the newly minted token. IT IS A TERRIBLE PRACTICE since the Ownable contract's owner variable can 'potentially' change the state variable upstream.
+I changed Owner state variable from private to public so that inheriting ERC20 contract can access the owner. Although the intention was to make sure whenever the mint button is pressed, owner of the ERC20
+contract receives the newly minted token. But it was a terrible mistake. Just could call a getter function which returns owner. It is also worth mentioning that IT IS A TERRIBLE PRACTICE to mess around with libraries. Changing private state variable to public is A HORRIBLE PRACTICE since the Ownable contract's owner variable can 'potentially' change the state variable upstream.
 
 5) Node module is up in the github
 so npm install would be not neccessary.
